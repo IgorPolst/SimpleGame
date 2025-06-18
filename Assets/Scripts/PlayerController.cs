@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float checkRadius;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     private bool isGrounded = false;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update() {
@@ -25,5 +27,20 @@ public class PlayerController : MonoBehaviour {
         }
 
         rb.linearVelocityX = horizontal * moveSpeed;
+
+        if (horizontal != 0) {
+            animator.SetBool("isRunning", true);
+        }
+        else {
+            animator.SetBool("isRunning", false);
+        }
+        animator.SetBool("isFalling", !isGrounded);
+
+        if (horizontal > 0) {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (horizontal < 0) {
+            transform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 }
