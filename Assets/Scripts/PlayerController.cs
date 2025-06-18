@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     [SerializeField] private float moveSpeed = 5;
@@ -13,6 +14,11 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private float fireCooldown = 2;
     [SerializeField] private Transform firePos;
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private AudioSource hurtSound;
+
+    [SerializeField] private Slider healthBar;
+
+    private float currentHealth = 100;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -73,5 +79,16 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(fireCooldown);
 
         hasFired = false;
+    }
+
+    public void TakeDamage(int damage) {
+        currentHealth -= damage;
+        healthBar.value = currentHealth / 100;
+        hurtSound.Play();
+        if (currentHealth <= 0) {
+            currentHealth = 100;
+            healthBar.value = 1;
+            transform.position = activeCheckpoint;
+        }
     }
 }
