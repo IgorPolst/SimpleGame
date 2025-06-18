@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Vector3 groundCheckPos;
     [SerializeField] private float checkRadius;
 
+    [SerializeField] private AudioSource jumpSound;
+
     private Rigidbody2D rb;
     private Animator animator;
 
@@ -28,6 +30,7 @@ public class PlayerController : MonoBehaviour {
 
         if (isGrounded && Input.GetButton("Jump")) {
             rb.linearVelocityY = jumpForce;
+            jumpSound.Play();
         }
 
         rb.linearVelocityX = horizontal * moveSpeed;
