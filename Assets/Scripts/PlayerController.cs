@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -9,10 +10,16 @@ public class PlayerController : MonoBehaviour {
 
     [SerializeField] private AudioSource jumpSound;
 
+    [SerializeField] private float fireCooldown = 2;
+    [SerializeField] private Transform firePos;
+    [SerializeField] private GameObject bulletPrefab;
+
     private Rigidbody2D rb;
     private Animator animator;
 
     private bool isGrounded = false;
+
+    private bool hasFired = false;
 
     [HideInInspector] public Vector3 activeCheckpoint = Vector3.zero;
 
@@ -28,9 +35,13 @@ public class PlayerController : MonoBehaviour {
 
         isGrounded = Physics2D.OverlapCircle(groundCheckPos + transform.position, checkRadius) != null;
 
-        if (isGrounded && Input.GetButton("Jump")) {
+        if (isGrounded && Input.GetButtonDown("Jump")) {
             rb.linearVelocityY = jumpForce;
             jumpSound.Play();
+        }
+
+        if (Input.GetButtonDown("Fire1")) {
+            StartCoroutine(Fire());
         }
 
         rb.linearVelocityX = horizontal * moveSpeed;
@@ -49,5 +60,18 @@ public class PlayerController : MonoBehaviour {
         else if (horizontal < 0) {
             transform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    private IEnumerator Fire() {
+        if (hasFired || Time.timeScale == 0) {
+            yield break;
+        }
+        hasFired = true;
+        GameObject tmp = Instantiate(bulletPrefab, firePos.position, Quaternion.identity);
+        tmp.transform.localScale = transform.localScale;
+
+        yield return new WaitForSeconds(fireCooldown);
+
+        hasFired = false;
     }
 }
