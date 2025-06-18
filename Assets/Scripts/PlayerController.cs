@@ -12,9 +12,13 @@ public class PlayerController : MonoBehaviour {
 
     private bool isGrounded = false;
 
+    [HideInInspector] public Vector3 activeCheckpoint = Vector3.zero;
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        activeCheckpoint = transform.position;
     }
 
     private void Update() {
