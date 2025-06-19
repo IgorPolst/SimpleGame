@@ -11,5 +11,9 @@ public class Bullet : MonoBehaviour {
         if (collision.gameObject.CompareTag("DestroyBullet") || collision.gameObject.CompareTag("Ground")) {
             Destroy(gameObject);
         }
+        else if (collision.gameObject.CompareTag("Enemy")) {
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(10);
+            Destroy(gameObject);
+        }
     }
 }

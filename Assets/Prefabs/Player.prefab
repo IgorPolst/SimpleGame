@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2254316756540077944}
   - component: {fileID: 639465580319308151}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HurtSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8003753148241371774}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 3617762364801990901}
   - component: {fileID: 4860746234408804501}
   - component: {fileID: 8186597210797510503}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 939547249023087302}
   - component: {fileID: 6427874000591445202}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: JumpSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
